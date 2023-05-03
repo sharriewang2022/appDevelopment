@@ -1,2 +1,0 @@
-# appDevelopment
-store code

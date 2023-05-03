@@ -1,0 +1,186 @@
+﻿@page "/billeditpage"
+@using MauiBlazorApp.Data
+@using MauiBlazorApp.Models
+@inject BillDBService billDBService
+@inject BillTypeDBService billTypeDBService
+@inject NavigationManager navigationManager
+
+<PageTitle>BillEditPage</PageTitle>
+
+<div style="border:dashed 0px; background-color:lightcyan;">
+    <h2>Edit Bill</h2>
+
+    <EditForm Model="@bill" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div style="border:dashed 1px; color:red;">@Message</div>
+        <p class="form-group">
+            <label>
+                Bill Type:
+                <InputSelect @bind-Value="bill.BillType">
+                    <option value="">-- Select Bill Type --</option>
+                    @foreach (var billType in billTypeList)
+                    {
+                    <option value="@billType.BillTypeName">@billType.BillTypeName</option>
+                    }
+                    <ValidationMessage For="() => bill.BillType"></ValidationMessage>
+                </InputSelect>
+            </label>
+        </p>
+        <p>
+            <label>
+                Bill Date:
+                <InputDate @bind-Value="bill.BillDate" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Bill Number:
+                <InputText @bind-Value="bill.BillNo" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Bill Name:
+                <InputText @bind-Value="bill.BillName" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Bill Direction:
+                <InputRadioGroup Name="billDirection" @bind-Value="bill.BillDirection">              
+                    <label>
+                        <InputRadio Name="billDirection" Value=1></InputRadio>income
+                    </label>
+                    <label>
+                        <InputRadio Name="billDirection" Value=0></InputRadio>payment
+                    </label>                   
+                </InputRadioGroup>
+            </label>
+        </p>
+        <p>
+            <label>
+                Bill Amount:
+                <InputNumber @bind-Value="bill.BillAmount" />
+                <ValidationMessage For="() => bill.BillAmount"></ValidationMessage>
+            </label>
+        </p>
+        <p>
+            <label>
+                Abstract:
+                <InputText @bind-Value="bill.BillAbstract" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Remark:
+                <InputTextArea @bind-Value="bill.Remark" />
+            </label>
+        </p>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" @onclick="EditBill">Edit</button>
+        <button class="btn btn-primary" @onclick="DeleteBill">Delete</button>
+        <button class="btn btn-primary" @onclick="SearchBill">Search</button>
+    </EditForm>
+</div>
+ 
+
+
+@code {
+    // this bill is default new 
+    private int isNewAdd = 0;
+    private string Message = String.Empty;
+    // whole domain definition
+    private Bill bill = new()
+        {
+            BillDate = DateTime.Today
+        };
+
+    List<BillType> billTypeList = new List<BillType>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        billTypeList = await billTypeDBService.GetAllBillTypesAsync();
+        Message = String.Empty;
+    }
+
+    private async Task OnValidSubmit(EditContext editContext)
+    {
+        String validResult = ValidateData(editContext);
+        if (!validResult.Equals(String.Empty))
+        {
+            return;      
+        }
+        bill.IsAdd = isNewAdd;
+        bill.InputDate = bill.BillDate;
+        bill.BillMonth = bill.BillDate.Month;
+        bill.BillYear = bill.BillDate.Year;
+        await billDBService.SaveBillAsync(bill);
+        bill = new()
+        {
+            BillDate = DateTime.Today            
+        };
+        Message = "The bill is saved successfully!";
+    }
+
+    /*
+    * valid the bill information
+    */
+    private String ValidateData(EditContext editContext)
+    {
+        if (editContext.Model is not Bill bill)
+        {
+            Message = "Bill object is invalid";
+            return Message;
+        }
+
+        if (bill.BillAmount == 0)
+        {
+            Message = "Bill amount should not be 0";
+            return Message;
+        }
+
+        /*
+        if (shirt is { Color: ShirtColor.Blue, Size: <= ShirtSize.Medium)
+            {
+            Message = "Blue T-Shirts not available in Small or Medium sizes";
+            return;
+        }*/
+        Message = String.Empty;
+        return Message;
+    }
+
+    /*
+    public class DialogService : IDialogService
+        {
+        public async Task<string> DisplayActionSheet(string title, string cancel, string destruction, params string[] buttons)
+            {
+            return await Application.Current.MainPage.DisplayActionSheet(title, cancel, destruction, buttons);
+        }
+
+        public async Task<bool> DisplayConfirm(string title, string message, string accept, string cancel)
+            {
+            return await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
+    }
+    }*/
+
+    private void SearchBill()
+    {
+        DirectToSearchBill();
+    }
+
+    private void DirectToSearchBill()
+    {
+        navigationManager.NavigateTo("/billlistpageNoCheckbox");
+    }
+    private void EditBill()
+    {
+        // this bill is not new, is updated
+        isNewAdd = 1;
+
+    }
+    private async Task<int> DeleteBill()
+    {
+        return await billDBService.DeleteBillAsync(bill);
+    }
+}
