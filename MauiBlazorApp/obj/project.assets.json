@@ -88963,11 +88963,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\MauiBlazorApp.csproj",
+      "projectUniqueName": "D:\\appDevelopment\\MauiBlazorApp\\MauiBlazorApp.csproj",
       "projectName": "MauiBlazorApp",
-      "projectPath": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\MauiBlazorApp.csproj",
+      "projectPath": "D:\\appDevelopment\\MauiBlazorApp\\MauiBlazorApp.csproj",
       "packagesPath": "C:\\Users\\wangsy1\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\obj\\",
+      "outputPath": "D:\\appDevelopment\\MauiBlazorApp\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

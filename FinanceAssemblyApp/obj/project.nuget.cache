@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QWTL642F9Aj3JMX2FLOvcjL9fGBLB1HvqfXItPbcNELL9yo7SO6CE8TW++U60NgGcV2FEwHiUxbqvMsSCeWPXg==",
+  "dgSpecHash": "g/yHJVIghjN5GAxiV2EkaMccjkWKtSYY6Sszi1zKeh5yFHUe4vYXS45g66qXla61oER5v09FC9+7TM0yVvw41w==",
   "success": true,
-  "projectFilePath": "D:\\Users\\wangsy1\\source\\repos\\FinanceAssemblyApp\\FinanceAssemblyApp.csproj",
+  "projectFilePath": "D:\\appDevelopment\\FinanceAssemblyApp\\FinanceAssemblyApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wangsy1\\.nuget\\packages\\antdesign\\0.14.4\\antdesign.0.14.4.nupkg.sha512",
     "C:\\Users\\wangsy1\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.5\\microsoft.aspnetcore.authorization.7.0.5.nupkg.sha512",

@@ -1,0 +1,12 @@
+D:\appDevelopment\FinanceWasmApp\Shared\bin\Debug\net7.0\FinanceWasmApp.Shared.deps.json
+D:\appDevelopment\FinanceWasmApp\Shared\bin\Debug\net7.0\FinanceWasmApp.Shared.dll
+D:\appDevelopment\FinanceWasmApp\Shared\bin\Debug\net7.0\FinanceWasmApp.Shared.pdb
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\FinanceWasmApp.Shared.csproj.AssemblyReference.cache
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\FinanceWasmApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\FinanceWasmApp.Shared.AssemblyInfoInputs.cache
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\FinanceWasmApp.Shared.AssemblyInfo.cs
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\FinanceWasmApp.Shared.csproj.CoreCompileInputs.cache
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\FinanceWasmApp.Shared.dll
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\refint\FinanceWasmApp.Shared.dll
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\FinanceWasmApp.Shared.pdb
+D:\appDevelopment\FinanceWasmApp\Shared\obj\Debug\net7.0\ref\FinanceWasmApp.Shared.dll

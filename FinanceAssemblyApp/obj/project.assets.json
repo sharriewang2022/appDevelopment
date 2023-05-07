@@ -8947,11 +8947,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\wangsy1\\source\\repos\\FinanceAssemblyApp\\FinanceAssemblyApp.csproj",
+      "projectUniqueName": "D:\\appDevelopment\\FinanceAssemblyApp\\FinanceAssemblyApp.csproj",
       "projectName": "FinanceAssemblyApp",
-      "projectPath": "D:\\Users\\wangsy1\\source\\repos\\FinanceAssemblyApp\\FinanceAssemblyApp.csproj",
+      "projectPath": "D:\\appDevelopment\\FinanceAssemblyApp\\FinanceAssemblyApp.csproj",
       "packagesPath": "C:\\Users\\wangsy1\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\wangsy1\\source\\repos\\FinanceAssemblyApp\\obj\\",
+      "outputPath": "D:\\appDevelopment\\FinanceAssemblyApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

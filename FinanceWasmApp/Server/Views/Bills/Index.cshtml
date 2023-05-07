@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FinanceWasmApp.Shared.Models.Bill>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BillType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillDirection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InputDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BillAbstract)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAdd)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillMonth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InputDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillAbstract)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdd)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
