@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Dfcv/duq33LtUA9CGRGrdePKve/LPf/Rc4xuQ0sboeM=",
+  "Hash": "YM643VCs3DfsXgA84g1OmD2MVdlidL85ZMCjNIrMICY=",
   "Source": "MauiBlazorApp",
   "BasePath": "/",
   "Mode": "Root",
@@ -10,7 +10,7 @@
     {
       "Name": "MauiBlazorApp\\wwwroot",
       "Source": "MauiBlazorApp",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "Pattern": "**"
     }
@@ -6239,10 +6239,10 @@
       "OriginalItemSpec": "C:\\Users\\wangsy1\\.nuget\\packages\\antdesign\\0.14.4\\staticwebassets\\less\\upload\\style\\rtl.less"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\bundle\\MauiBlazorApp.styles.css",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\bundle\\MauiBlazorApp.styles.css",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\bundle\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\bundle\\",
       "BasePath": "/",
       "RelativePath": "MauiBlazorApp.styles.css",
       "AssetKind": "All",
@@ -6253,13 +6253,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\bundle\\MauiBlazorApp.styles.css"
+      "OriginalItemSpec": "D:\\appDevelopment\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\bundle\\MauiBlazorApp.styles.css"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\projectbundle\\MauiBlazorApp.bundle.scp.css",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\projectbundle\\MauiBlazorApp.bundle.scp.css",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\projectbundle\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\projectbundle\\",
       "BasePath": "/",
       "RelativePath": "MauiBlazorApp.bundle.scp.css",
       "AssetKind": "All",
@@ -6270,13 +6270,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\projectbundle\\MauiBlazorApp.bundle.scp.css"
+      "OriginalItemSpec": "D:\\appDevelopment\\MauiBlazorApp\\obj\\Debug\\net7.0-android\\scopedcss\\projectbundle\\MauiBlazorApp.bundle.scp.css"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\app.css",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\app.css",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/app.css",
       "AssetKind": "All",
@@ -6290,10 +6290,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.css"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -6307,10 +6307,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -6324,10 +6324,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "AssetKind": "All",
@@ -6341,10 +6341,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
       "AssetKind": "All",
@@ -6358,10 +6358,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
       "AssetKind": "All",
@@ -6375,10 +6375,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
       "AssetKind": "All",
@@ -6392,10 +6392,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
       "AssetKind": "All",
@@ -6409,10 +6409,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
       "AssetKind": "All",
@@ -6426,10 +6426,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/FONT-LICENSE",
       "AssetKind": "All",
@@ -6443,10 +6443,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/ICON-LICENSE",
       "AssetKind": "All",
@@ -6460,10 +6460,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\ICON-LICENSE"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\README.md",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\css\\open-iconic\\README.md",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/open-iconic/README.md",
       "AssetKind": "All",
@@ -6477,10 +6477,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\favicon.ico",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\favicon.ico",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -6494,10 +6494,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\index.html",
+      "Identity": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\index.html",
       "SourceId": "MauiBlazorApp",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Users\\wangsy1\\source\\repos\\MauiBlazorApp\\wwwroot\\",
+      "ContentRoot": "D:\\appDevelopment\\MauiBlazorApp\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "index.html",
       "AssetKind": "All",

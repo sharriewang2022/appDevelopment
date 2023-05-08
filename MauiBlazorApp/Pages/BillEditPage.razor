@@ -7,84 +7,82 @@
 
 <PageTitle>BillEditPage</PageTitle>
 
-<div style="border:dashed 0px; background-color:lightcyan;">
+<div style="border:dashed 0px;">
     <h2>Edit Bill</h2>
 
     <EditForm Model="@bill" OnValidSubmit="OnValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        <div style="border:dashed 1px; color:red;">@Message</div>
-        <p class="form-group">
+        <div style="border:dashed 0px; color:red;">@Message</div>
+        <div class="form-group">
             <label>
                 Bill Type:
-                <InputSelect @bind-Value="bill.BillType">
-                    <option value="">-- Select Bill Type --</option>
-                    @foreach (var billType in billTypeList)
-                    {
-                    <option value="@billType.BillTypeName">@billType.BillTypeName</option>
-                    }
-                    <ValidationMessage For="() => bill.BillType"></ValidationMessage>
-                </InputSelect>
             </label>
-        </p>
-        <p>
+            <InputSelect class="form-control" @bind-Value="bill.BillType">
+                <option value="">-- Select Bill Type --</option>
+                @foreach (var billType in billTypeList)
+                {
+                <option value="@billType.BillTypeName">@billType.BillTypeName</option>
+                }
+                <ValidationMessage For="() => bill.BillType"></ValidationMessage>
+            </InputSelect>
+        </div>
+        <div class="form-group">
             <label>
                 Bill Date:
-                <InputDate @bind-Value="bill.BillDate" />
             </label>
-        </p>
-        <p>
+            <InputDate class="form-control" @bind-Value="bill.BillDate" />            
+        </div>
+        <div class="form-group">
             <label>
                 Bill Number:
-                <InputText @bind-Value="bill.BillNo" />
             </label>
-        </p>
-        <p>
+            <InputText class="form-control" @bind-Value="bill.BillNo" />            
+        </div>
+        <div class="form-group">
             <label>
                 Bill Name:
-                <InputText @bind-Value="bill.BillName" />
             </label>
-        </p>
-        <p>
+            <InputText class="form-control" @bind-Value="bill.BillName" />            
+        </div>
+        <div class="form-group">
             <label>
                 Bill Direction:
-                <InputRadioGroup Name="billDirection" @bind-Value="bill.BillDirection">              
-                    <label>
-                        <InputRadio Name="billDirection" Value=1></InputRadio>income
-                    </label>
-                    <label>
-                        <InputRadio Name="billDirection" Value=0></InputRadio>payment
-                    </label>                   
-                </InputRadioGroup>
             </label>
-        </p>
-        <p>
+            <InputRadioGroup class="form-control" Name="billDirection" @bind-Value="bill.BillDirection">
+                <label>
+                    <InputRadio Name="billDirection" Value=1></InputRadio>income
+                </label>
+                <label>
+                    <InputRadio Name="billDirection" Value=0></InputRadio>payment
+                </label>                   
+            </InputRadioGroup>            
+        </div>
+        <div class="form-group">
             <label>
                 Bill Amount:
-                <InputNumber @bind-Value="bill.BillAmount" />
-                <ValidationMessage For="() => bill.BillAmount"></ValidationMessage>
             </label>
-        </p>
-        <p>
+            <InputNumber class="form-control" @bind-Value="bill.BillAmount" />
+            <ValidationMessage For="() => bill.BillAmount"></ValidationMessage>   
+        </div>
+        <div class="form-group">
             <label>
                 Abstract:
-                <InputText @bind-Value="bill.BillAbstract" />
             </label>
-        </p>
-        <p>
+            <InputText class="form-control" @bind-Value="bill.BillAbstract" />    
+        </div>
+        <div class="form-group">
             <label>
                 Remark:
-                <InputTextArea @bind-Value="bill.Remark" />
             </label>
-        </p>
+            <InputTextArea class="form-control"  @bind-Value="bill.Remark" />   
+        </div>
         <button class="btn btn-primary" type="submit">Save</button>
         <button class="btn btn-primary" @onclick="EditBill">Edit</button>
-        <button class="btn btn-primary" @onclick="DeleteBill">Delete</button>
         <button class="btn btn-primary" @onclick="SearchBill">Search</button>
     </EditForm>
 </div>
  
-
 
 @code {
     // this bill is default new 

@@ -11,7 +11,7 @@ namespace MauiBlazorApp.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(30, ErrorMessage = "BillType length can't be more than 30.")]
+        [StringLength(30, ErrorMessage = "BillType length can't be more than 30.")]
         public string BillType { get; set; }
 
         [System.ComponentModel.DataAnnotations.MaxLength(50), Unique]
@@ -37,10 +37,10 @@ namespace MauiBlazorApp.Models
         [Required]
         public decimal BillAmount { get; set; }
 
-        [MaxLength(200, ErrorMessage = "Bill Abstract length can't be more than 200.")]
+        [StringLength(200, ErrorMessage = "Bill Abstract length can't be more than 200.")]
         public string BillAbstract { get; set; }
 
-        [MaxLength(200, ErrorMessage = "Remark length can't be more than 200.")]
+        [StringLength(200, ErrorMessage = "Remark length can't be more than 200.")]
         public string Remark { get; set; }
 
         // 0: add; 1: update
