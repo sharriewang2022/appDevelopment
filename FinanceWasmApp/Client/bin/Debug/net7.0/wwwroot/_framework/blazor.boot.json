@@ -202,14 +202,14 @@
       "netstandard.dll": "sha256-OYYuPT3JUknj4LdYIa58zF7kDB3tCnLzjCSuhEjtKXM=",
       "System.Private.CoreLib.dll": "sha256-EVS7zPxPV\/41g2mzPwdXtwiigWxI\/SeAHme1IgyD6tc=",
       "FinanceWasmApp.Shared.dll": "sha256-khZnTOuwResHOdnXLzhZAsKmBWQlPG\/JDPIRznf8RaE=",
-      "FinanceWasmApp.Client.dll": "sha256-LdLBKQD05SnCQZu1zy7c8jj7z\/sLBgMCFaqigGYmamw="
+      "FinanceWasmApp.Client.dll": "sha256-k9mMNVfvESTSkukRr\/fDEz4qytwWaxofPukqh8jOLTY="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
       "FinanceWasmApp.Shared.pdb": "sha256-lg5NgH5ZFDdqhDYw7mfRHjC08YeTezlHJjbSJQ2RAM4=",
-      "FinanceWasmApp.Client.pdb": "sha256-k61lNu4i8iYkU4xJ+OFpgvR8+PKbhZofKqLHeQQ+QD0="
+      "FinanceWasmApp.Client.pdb": "sha256-f1CBEGTV1wuutrY0MaSWGkxfPmIdtuFO\/GNEa7RxzPI="
     },
     "runtime": {
       "dotnet.7.0.5.dt4xkz79ls.js": "sha256-codB25EodaFEP43MDCfMBuKXU4LqurUKnQrpoMIFnPs=",
