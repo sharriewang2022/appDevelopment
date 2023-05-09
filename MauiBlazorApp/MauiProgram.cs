@@ -27,7 +27,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<WeatherForecastService>();
 
         //import AntDesign
-        //builder.Services.AddAntDesign();
+        builder.Services.AddAntDesign();
         //set parameter
         /* builder.Services.Configure<ProSettings>(settings =>
          {

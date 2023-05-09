@@ -44,7 +44,6 @@ public class MonoPackageManager_Resources {
 		"OneOf.dll",
 		"SQLite-net.dll",
 		"SQLitePCLRaw.batteries_v2.dll",
-		"SQLitePCLRaw.nativelibrary.dll",
 		"SQLitePCLRaw.core.dll",
 		"SQLitePCLRaw.lib.e_sqlite3.android.dll",
 		"SQLitePCLRaw.provider.e_sqlite3.dll",
