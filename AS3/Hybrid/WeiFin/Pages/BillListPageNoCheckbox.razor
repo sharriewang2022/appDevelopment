@@ -3,9 +3,6 @@
 @using WeiFin.Models
 @inject BillDBService billDBService
 
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
-
 <h1>Search Bill</h1>
 
 <div style="border:dashed 1px;background-color:lightgoldenrodyellow;">
@@ -20,6 +17,7 @@ else
         <thead>
             <tr>
                 <th>Bill Type</th>
+                <th>Bill Number</th>
                 <th>Bill Date</th>
                 <th>Bill Direction</th>
                 <th>Bill Amount</th>
@@ -32,6 +30,7 @@ else
             {
                 <tr>
                     <td>@bill.BillType</td>
+                    <td>@bill.BillNo</td>
                     <td>@bill.BillDate.ToShortDateString()</td>
                     <td>@bill.BillDirection</td>
                     <td>@bill.BillAmount</td>

@@ -14,5 +14,6 @@ namespace WeiFin.Models
         public string RefreshToken { get; set; }
         public string Email { get; set; }
         public string UserAvatar { get; set; }
+        public string AccountNo { get; set; }
     }
 }

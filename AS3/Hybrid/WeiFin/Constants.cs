@@ -8,7 +8,7 @@ namespace WeiFin;
 
 public static class Constants
 {
-    public const string DatabaseFilename = "billSQLite.db3";
+    public const string DatabaseFilename = "WeiFinSQLite.db3";
 
     public const SQLite.SQLiteOpenFlags Flags =
         // open the database in read/write mode

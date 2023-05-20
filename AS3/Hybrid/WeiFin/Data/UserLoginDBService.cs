@@ -92,7 +92,7 @@ public class UserRegisterDBService
             if (null == userRegister)
                 throw new Exception("Valid user login information required");
             // save a UserRegister         
-            if (userRegister.IsAdd != 0)
+            if (userRegister.IsAdd == 0)
             {
                 return await conn.UpdateAsync(userRegister);
             }
