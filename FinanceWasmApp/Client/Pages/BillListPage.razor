@@ -15,12 +15,14 @@
 </div>
 
 <Table @ref="table"
+       RowClassName="@(x =>{ i=1-i; return i==0?"evenrow":""; })"
        TItem="Bill"
        DataSource="@bills"
        Total="_total"
        @bind-PageIndex="_pageIndex"
        @bind-PageSize="_pageSize"
-       @bind-SelectedRows="selectedRows"
+       @bind-SelectedRows="selectedRows"      
+       PaginationPosition="right"
        OnChange="OnChange">
     <Selection Key="@(context.Id.ToString())" />
     <PropertyColumn Property="c=>c.Id" Sortable />
@@ -33,7 +35,7 @@
     <PropertyColumn Property="c=>c.Remark" />
     <ActionColumn>
         <Space>
-            <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">Delete</Button></SpaceItem>
+            <SpaceItem><Button Danger OnClick="()=>Delete(context)">Delete</Button></SpaceItem>
         </Space>
     </ActionColumn>
 </Table>
@@ -45,13 +47,20 @@
 <Button Type="@ButtonType.Primary" OnClick="()=> { _pageIndex--; }">Previous page</Button>
 <Button Type="@ButtonType.Primary" OnClick="()=> { _pageIndex++; }">Next Page</Button>
 
-                @code {
+<style>
+    .evenrow {
+        background-color: lightblue;
+    }
+</style>
+
+@code {
     private Bill[] bills;
     IEnumerable<Bill> selectedRows;
     ITable table;
     int _pageIndex = 1;
     int _pageSize = 10;
     int _total = 0;
+    int i = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -83,9 +92,11 @@
         selectedRows = selected;
     }
 
-    private void Delete(int id)
+    private async Task Delete(Bill bill)
     {
+        int id = bill.Id;
         bills = bills.Where(x => x.Id != id).ToArray();
+        await billDBService.DeleteBillAsync(bill);
         _total = bills.Length;
     }
 }

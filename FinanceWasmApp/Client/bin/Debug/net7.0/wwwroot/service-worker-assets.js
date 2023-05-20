@@ -885,11 +885,11 @@
       "url": "_framework\/FinanceWasmApp.Shared.pdb"
     },
     {
-      "hash": "sha256-1VLC8wspMvRZAUbObabYVzHOTlKCOspSccGyErzpj9U=",
+      "hash": "sha256-34mk3OgYHP8uh6hsE60dhURkO01uG\/4TvUOU9CK9CGo=",
       "url": "_framework\/FinanceWasmApp.Client.dll"
     },
     {
-      "hash": "sha256-Ny4DloLQ9lYBTFehbHdddkKc7+9flB75EIYov5m2jf4=",
+      "hash": "sha256-GavF7Lx8w1efoNsZp4yTMQ8kDPZ2gR2lwG0O7Fs0RxU=",
       "url": "_framework\/FinanceWasmApp.Client.pdb"
     },
     {
@@ -897,7 +897,7 @@
       "url": "_framework\/blazor.webassembly.js"
     },
     {
-      "hash": "sha256-+M875iEuNKF\/Z4FW1RxpriwiyQc0ViU9Us2M9\/8XM30=",
+      "hash": "sha256-LpRIHuh1IVdr9ULXjNW6zyeMxLPfIcr7y7zakU8HRDA=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -2365,5 +2365,5 @@
       "url": "_content\/AntDesign\/less\/upload\/style\/rtl.less"
     }
   ],
-  "version": "ZmUD41C\/"
+  "version": "TqumJx7L"
 };

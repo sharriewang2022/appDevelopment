@@ -146,22 +146,21 @@ namespace FinanceWasmApp.Server.Controllers
         }
 
         // POST: Bills/Delete/5
-        [HttpPost("deleteOneBillAsync"), ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost("deleteOneBillAsync")]
+        public async Task DeleteConfirmed(Bill bill)
         {
             if (_context.gl_bill == null)
             {
-                return Problem("Entity set 'BillDBContext.gl_bill'  is null.");
+               Problem("Entity set 'BillDBContext.gl_bill'  is null.");
             }
-            var bill = await _context.gl_bill.FindAsync(id);
+            int id = bill.Id;
+            var findbill = await _context.gl_bill.FindAsync(id);
             if (bill != null)
             {
-                _context.gl_bill.Remove(bill);
+                _context.gl_bill.Remove(findbill);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool BillExists(int id)
