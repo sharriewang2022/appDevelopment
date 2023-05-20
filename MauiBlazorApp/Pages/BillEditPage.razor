@@ -77,8 +77,9 @@
             </label>
             <InputTextArea class="form-control"  @bind-Value="bill.Remark" />   
         </div>
+        <button class="btn btn-primary" @onclick="AddBill">Add</button>
+        <button class="btn btn-primary" style="display:none" @onclick="EditBill">Edit</button>
         <button class="btn btn-primary" type="submit">Save</button>
-        <button class="btn btn-primary" @onclick="EditBill">Edit</button>
         <button class="btn btn-primary" @onclick="SearchBill">Search</button>
     </EditForm>
 </div>
@@ -86,7 +87,7 @@
 
 @code {
     // this bill is default new 
-    private int isNewAdd = 0;
+    private int isNewAdd = 1;
     private string Message = String.Empty;
     // whole domain definition
     private Bill bill = new()
@@ -114,10 +115,8 @@
         bill.BillMonth = bill.BillDate.Month;
         bill.BillYear = bill.BillDate.Year;
         await billDBService.SaveBillAsync(bill);
-        bill = new()
-        {
-            BillDate = DateTime.Today            
-        };
+        //before click Add bill button, bill always could be edited 
+        isNewAdd = 0;
         Message = "The bill is saved successfully!";
     }
 
@@ -171,10 +170,20 @@
     {
         navigationManager.NavigateTo("/billlistpageNoCheckbox");
     }
+    private void AddBill()
+    {
+        // this bill is new
+        isNewAdd = 1;
+        bill = new()
+        {
+            BillDate = DateTime.Today
+        };
+
+    }
     private void EditBill()
     {
         // this bill is not new, is updated
-        isNewAdd = 1;
+        isNewAdd = 0;
 
     }
     private async Task<int> DeleteBill()
