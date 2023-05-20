@@ -1,0 +1,18 @@
+﻿@page "/logout"
+@using WeiFin.Services
+@inject NavigationManager navigationManager
+@inject CustomAuthenticationStateProvider customAuthenticationStateProvider
+ 
+<!-- this page is unused rightnow-->
+<h3>LoginOut</h3>
+
+<div class="loader loader-bouncing"><span>Redirecting...</span></div>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await customAuthenticationStateProvider.Logout();
+        navigationManager.NavigateTo("/login");
+    }
+}
