@@ -13,23 +13,23 @@
     <EditForm Model="@reportCondition" OnValidSubmit="OnValidSubmit">
         <div style="border:dashed 0px; color:red;">@Message</div>
         <div class="form-group">
-            <label>
+            <label class="form-control">
                 Year:
-                <InputSelect class="form-control" @bind-Value="reportCondition.Year">
+                <InputSelect  @bind-Value="reportCondition.Year">
                     @foreach (var year in yearArray)
                     {
                         <option value="@year">@year</option>
                     }
                 </InputSelect>
                  Start Month:
-                <InputSelect class="form-control" @bind-Value="reportCondition.StartMonth">
+                <InputSelect @bind-Value="reportCondition.StartMonth">
                     @foreach (var startMonth in monthArray)
                     {
                         <option value="@startMonth">@startMonth</option>
                     }
                 </InputSelect>
                 End Month:
-                <InputSelect class="form-control" @bind-Value="reportCondition.EndMonth">
+                <InputSelect @bind-Value="reportCondition.EndMonth">
                     @foreach (var endMonth in monthArray)
                     {
                         <option value="@endMonth">@endMonth</option>

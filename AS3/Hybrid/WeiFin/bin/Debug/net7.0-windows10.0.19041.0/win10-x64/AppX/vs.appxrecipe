@@ -30,25 +30,25 @@
     <AppXManifest Include="D:\appDevelopment\AS3\Hybrid\WeiFin\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-05-20T13:40:24.124</Modified>
+      <Modified>2023-05-21T10:23:21.616</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeiFin\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-05-20T11:54:50.497</Modified>
+      <Modified>2023-05-21T09:57:50.417</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeiFin\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\WeiFin.runtimeconfig.json">
       <PackagePath>WeiFin.runtimeconfig.json</PackagePath>
-      <Modified>2023-05-20T06:54:26.376</Modified>
+      <Modified>2023-05-21T06:21:04.553</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeiFin\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\WeiFin.dll">
       <PackagePath>WeiFin.dll</PackagePath>
-      <Modified>2023-05-20T13:40:19.131</Modified>
+      <Modified>2023-05-21T10:23:16.279</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeiFin\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>WeiFin.exe</PackagePath>
-      <Modified>2023-05-20T13:40:19.294</Modified>
+      <Modified>2023-05-21T10:23:16.409</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\wangsy1\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.5\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -1056,7 +1056,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeiFin\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\WeiFin.deps.json">
       <PackagePath>WeiFin.deps.json</PackagePath>
-      <Modified>2023-05-20T13:40:23.263</Modified>
+      <Modified>2023-05-21T10:23:20.752</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.81\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
@@ -2840,7 +2840,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeiFin\Shared\NavMenu.razor.css">
       <PackagePath>Shared\NavMenu.razor.css</PackagePath>
-      <Modified>2023-05-09T03:54:37.525</Modified>
+      <Modified>2023-05-21T08:50:48.976</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -34,13 +34,7 @@ public static class MauiProgram
 
         builder.Services.TryAddScoped<AuthenticationStateProvider, ExternalAuthStateProvider>();
 
-        //Register needed elements for authentication
-        builder.Services.AddAuthorizationCore(); // This is the core functionality
-        // This is the custom provider
-        builder.Services.AddScoped<CustomAuthenticationStateProvider>(); 
-         //When asking for the default Microsoft one, give these
-        builder.Services.AddScoped<AuthenticationStateProvider>(s => s.GetRequiredService<CustomAuthenticationStateProvider>());
-
+        
         return builder.Build();
 	}
 }
