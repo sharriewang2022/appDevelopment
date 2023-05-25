@@ -1,0 +1,190 @@
+﻿@page "/billeditpage"
+@using WeFin.Data
+@using WeFin.Models
+@inject BillDBService billDBService
+@inject BillTypeDBService billTypeDBService
+@inject NavigationManager navigationManager
+
+
+<PageTitle>BillEditPage</PageTitle>
+
+<div style="border:dashed 0px;">
+    <h2>Edit Bill</h2>
+
+    <EditForm Model="@bill" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div style="border:dashed 0px; color:red;">@Message</div>
+        <div class="form-group">
+            <label>
+                Account Number:
+            </label>
+            <InputText class="form-control" @bind-Value="bill.AccountNo" disabled="disabled" />
+        </div>
+        <div class="form-group">
+            <label>
+                Bill Type:
+            </label>
+            <InputSelect class="form-control" @bind-Value="bill.BillType">
+                <option value="">-- Select Bill Type --</option>
+                @foreach (var billType in billTypeList)
+                {
+                <option value="@billType.BillTypeName">@billType.BillTypeName</option>
+                }
+                <ValidationMessage For="() => bill.BillType"></ValidationMessage>
+            </InputSelect>
+        </div>
+        <div class="form-group">
+            <label>
+                Bill Date:
+            </label>
+            <InputDate class="form-control" @bind-Value="bill.BillDate" />            
+        </div>
+        <div class="form-group">
+            <label>
+                Bill Number:
+            </label>
+            <InputText class="form-control" @bind-Value="bill.BillNo" />            
+        </div>
+        <div class="form-group">
+            <label>
+                Bill Name:
+            </label>
+            <InputText class="form-control" @bind-Value="bill.BillName" />            
+        </div>
+        <div class="form-group">
+            <label>
+                Bill Direction:
+            </label>
+            <InputRadioGroup class="form-control" Name="billDirection" @bind-Value="bill.BillDirection">
+                <label>
+                    <InputRadio Name="billDirection" Value=1></InputRadio>income
+                </label>
+                <label>
+                    <InputRadio Name="billDirection" Value="0"></InputRadio>payment
+                </label>                   
+            </InputRadioGroup>            
+        </div>
+        <div class="form-group">
+            <label>
+                Bill Amount:
+            </label>
+            <Input type="Number" class="form-control" @bind-Value="bill.BillAmount" />
+            <ValidationMessage For="() => bill.BillAmount"></ValidationMessage>   
+        </div>
+        <div class="form-group">
+            <label>
+                Abstract:
+            </label>
+            <InputText class="form-control" @bind-Value="bill.BillAbstract" />    
+        </div>
+        <div class="form-group">
+            <label>
+                Remark:
+            </label>
+            <InputTextArea class="form-control"  @bind-Value="bill.Remark" />   
+        </div>
+        <button class="btn btn-primary" @onclick="AddBill">Add</button>
+        <button class="btn btn-primary" style="display:none" @onclick="EditBill">Edit</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" @onclick="SearchBill">Search</button>
+    </EditForm>
+</div>
+ 
+
+@code {
+    // this bill is default new 
+    private int isNewAdd = 0;
+    private string Message = String.Empty;
+    // whole domain definition
+    private Bill bill = new()
+        {
+            BillDate = DateTime.Today
+        };
+
+    List<BillType> billTypeList = new List<BillType>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        bill.AccountNo = Setting.UserBasicDetail.AccountNo;
+        billTypeList = await billTypeDBService.GetAllBillTypesAsync();
+        Message = String.Empty;
+    }
+
+    private async Task OnValidSubmit(EditContext editContext)
+    {
+        String validResult = ValidateData(editContext);
+        if (!validResult.Equals(String.Empty))
+        {
+            return;      
+        }
+        bill.IsAdd = isNewAdd;
+        bill.InputDate = bill.BillDate;
+        bill.BillMonth = bill.BillDate.Month;
+        bill.BillYear = bill.BillDate.Year;
+        if (bill.BillDirection == 1)
+        {
+            bill.Income = bill.BillAmount;
+        }
+        else
+        {
+            bill.Payment = bill.BillAmount;
+        }
+        await billDBService.SaveBillAsync(bill);
+        //before click Add bill button, bill always could be edited
+        isNewAdd = 0;
+        await App.Current.MainPage.DisplayAlert("success", "The bill is saved successfully!", "OK");
+        //Message = "The bill is saved successfully!";
+    }
+
+    /*
+    * valid the bill information
+    */
+    private String ValidateData(EditContext editContext)
+    {
+        if (editContext.Model is not Bill bill)
+        {
+            Message = "Bill object is invalid";
+            return Message;
+        }
+
+        if (bill.BillAmount == 0)
+        {
+            Message = "Bill amount should not be 0";
+            return Message;
+        }
+
+        Message = String.Empty;
+        return Message;
+    }
+
+    private void SearchBill()
+    {
+        DirectToSearchBill();
+    }
+
+    private void DirectToSearchBill()
+    {
+        navigationManager.NavigateTo("/billlistpageNoCheckbox");
+    }
+    private void AddBill()
+    {
+        // this bill is new
+        isNewAdd = 1;
+        bill = new()
+            {
+                BillDate = DateTime.Today
+            };
+
+    }
+    private void EditBill()
+    {
+        // this bill is not new, is updated
+        isNewAdd = 0;
+
+    }
+    private async Task<int> DeleteBill()
+    {
+        return await billDBService.DeleteBillAsync(bill);
+    }
+}

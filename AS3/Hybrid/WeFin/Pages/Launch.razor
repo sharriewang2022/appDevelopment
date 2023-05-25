@@ -1,0 +1,50 @@
+﻿@page "/";
+@using WeFin.Models
+@using WeFin.Data
+@using Newtonsoft.Json
+@using System.IdentityModel.Tokens.Jwt
+@inject NavigationManager NavManager
+@inject UserRegisterDBService userRegisterDBService
+<h3>Launch the Application</h3>
+
+Launching the app
+
+@code {
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        string userDetailsStr = await SecureStorage.GetAsync(nameof(Setting.UserBasicDetail));
+
+        if (Setting.UserBasicDetail != null && !string.IsNullOrWhiteSpace(userDetailsStr))
+        {
+            NavManager.NavigateTo("/welcomepage");
+            /*
+            var userBasicDetail = JsonConvert.DeserializeObject<UserBasicDetail>(userDetailsStr);
+            var handler = new JwtSecurityTokenHandler();
+            var jsontoken = handler.ReadToken(userBasicDetail.AccessToken) as JwtSecurityToken;
+            Setting.UserBasicDetail = userBasicDetail;
+            if (jsontoken.ValidTo < DateTime.UtcNow)
+            {
+                bool isTokenRefreshed = await userRegisterDBService.RefreshToken();
+
+                if (isTokenRefreshed)
+                {
+                    NavManager.NavigateTo("/welcomepage");
+                }
+                else
+                {
+                    NavManager.NavigateTo("/login");
+                }
+            }
+            else
+            {
+                NavManager.NavigateTo("/welcomepage");
+            }*/
+        }
+        else
+        {
+            NavManager.NavigateTo("/login");
+        }
+    }
+}

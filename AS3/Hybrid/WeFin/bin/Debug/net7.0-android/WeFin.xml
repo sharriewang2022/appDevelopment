@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeFin</name>
+    </assembly>
+    <members>
+        <member name="M:WeFin.Services.CustomAuthenticationStateProvider.Login(System.String)">
+            <summary>
+            This method should be called upon a successful user login, and it will store the user's JWT token in SecureStorage.
+            Upon saving this it will also notify .NET that the authentication state has changed which will enable authenticated views
+            </summary>
+            <param name="token"> JWT to store</param>
+            <returns></returns>
+        </member>
+        <member name="M:WeFin.Services.CustomAuthenticationStateProvider.Logout">
+            <summary>
+            This method should be called to log-off the user from the application, which simply removed the stored token and then
+            notifies of the change
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeFin.Services.CustomAuthenticationStateProvider.GetAuthenticationStateAsync">
+            <summary>
+            This is the key method that is called by .NET to accomplish our goal.  It is the method that is queried to get the current 
+            AuthenticationState for the user.  In our base, if we have a token in secure storage, we are logged in, but we could easily
+            do much more than this. 
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

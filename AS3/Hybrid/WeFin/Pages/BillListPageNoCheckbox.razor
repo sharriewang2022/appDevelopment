@@ -1,0 +1,58 @@
+﻿@page "/billlistpageNoCheckbox"
+@using WeFin.Data
+@using WeFin.Models
+@inject BillDBService billDBService
+
+<h1>Search Bill</h1>
+
+<div style="border:dashed 1px;background-color:lightgoldenrodyellow;">
+</div>
+@if (bills == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bill Type</th>
+                <th>Bill Number</th>
+                <th>Bill Date</th>
+                <th>Bill Direction</th>
+                <th>Bill Amount</th>
+                <th>Bill Abstract</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bill in bills)
+            {
+                <tr>
+                    <td>@bill.BillType</td>
+                    <td>@bill.BillNo</td>
+                    <td>@bill.BillDate.ToShortDateString()</td>
+                    <td>@bill.BillDirection</td>
+                    <td>@bill.BillAmount</td>
+                    <td>@bill.BillAbstract</td>
+                    <td>@bill.Remark</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Bill> bills;
+
+    protected override async Task OnInitializedAsync()
+    {
+        bills = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.AccountNo);
+    }
+
+    private async Task<List<Bill>> GetAllBills()
+    {
+        bills = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.AccountNo);
+        return bills;
+    }
+}

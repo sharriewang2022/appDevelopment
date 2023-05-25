@@ -1,0 +1,157 @@
+﻿@page "/ledgerpage"
+@using WeFin.Data
+@using WeFin.Models
+@inject BillDBService billDBService
+@inject BillTypeDBService billTypeDBService
+@inject NavigationManager navigationManager
+
+
+<PageTitle>Ledger ReportPage</PageTitle>
+
+<div style="border:dashed 0px;">
+    <h2>Ledger Report</h2>
+
+    <EditForm Model="@reportCondition" OnValidSubmit="OnValidSubmit">
+        <div style="border:dashed 0px; color:red;">@Message</div>
+        <div class="form-group">
+            <label class="form-control">
+                Year:
+                <InputSelect @bind-Value="reportCondition.Year">
+                    @foreach (var year in yearArray)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </InputSelect>
+                Start Month:
+                <InputSelect @bind-Value="reportCondition.StartMonth">
+                    @foreach (var startMonth in monthArray)
+                    {
+                        <option value="@startMonth">@startMonth</option>
+                    }
+                </InputSelect>
+                End Month:
+                <InputSelect @bind-Value="reportCondition.EndMonth">
+                    @foreach (var endMonth in monthArray)
+                    {
+                        <option value="@endMonth">@endMonth</option>
+                    }
+                </InputSelect>
+                Bill Type:
+                <InputSelect class="form-control" @bind-Value="reportCondition.BillType">
+                    <option value=""></option>
+                    @foreach (var billType in billTypeList)
+                    {
+                        <option value="@billType.BillTypeName">@billType.BillTypeName</option>
+                    }
+                </InputSelect>
+            </label>
+        </div>
+        <button class="btn btn-primary" @onclick="generateJournal">Search</button>
+    </EditForm>
+</div>
+
+@if (ledgerReportList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Abstract</th>
+                <th>Account Number</th>
+                <th>Total Income</th>
+                <th>Total Payment</th>
+                <th>Balance direction</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ledgerReport in ledgerReportList)
+            {
+                <tr>
+                    <td>@ledgerReport.BillYear</td>
+                    <td>@ledgerReport.BillMonth</td>
+                    <td>Current period</td>
+                    <td>@ledgerReport.AccountNo</td>
+                    <td>@ledgerReport.TotalIncome</td>
+                    <td>@ledgerReport.TotalPayment</td>
+                    <td>@ledgerReport.BalanceDirection</td>
+                    <td>@ledgerReport.RowSumAmount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string Message = String.Empty;
+
+    private List<LedgerReportEntity> ledgerReportList;
+    // whole domain definition
+    private ReportCondition reportCondition = new()
+    {
+    };
+
+    List<BillType> billTypeList = new List<BillType>();
+    int[] yearArray = new int[] { 2018, 2019, 2020, 2022, 2023 };
+    int[] monthArray = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+
+    protected override async Task OnInitializedAsync()
+    {
+        billTypeList = await billTypeDBService.GetAllBillTypesAsync();
+        Message = String.Empty;
+    }
+    private async Task OnValidSubmit(EditContext editContext)
+    {
+        ValidateData(editContext);
+    }
+    /*
+    * valid the bill information
+    */
+    private String ValidateData(EditContext editContext)
+    {
+        if (editContext.Model is not ReportCondition reportCondition)
+        {
+            Message = "ReportCondition object is invalid";
+            return Message;
+        }
+        Message = String.Empty;
+        return Message;
+    }
+
+    private async Task generateJournal()
+    {
+        ledgerReportList = await billDBService.GetBillsLedgerSumAsync(reportCondition);
+        int oldBillMonth = ledgerReportList[0].BillMonth;
+        int currentBillMonth;
+        decimal incomeSumAmount = 0; // year sum
+        decimal paymentSumAmount = 0;
+        decimal rowSumAmount = 0; // the money summary in last column in each row
+        decimal incomeMonthSumAmount = 0;
+        decimal paymentMonthSumAmount = 0;
+        foreach (LedgerReportEntity ledgerReport in ledgerReportList)
+        {
+            incomeMonthSumAmount = ledgerReport.TotalIncome;
+            paymentMonthSumAmount = ledgerReport.TotalPayment;
+
+            ledgerReport.RowSumAmount = rowSumAmount + ledgerReport.TotalIncome - ledgerReport.TotalPayment;
+            if (ledgerReport.RowSumAmount > 0)
+            {
+                ledgerReport.BalanceDirection = "Profit";
+            }
+            else if (ledgerReport.RowSumAmount == 0)
+            {
+                ledgerReport.BalanceDirection = "Balance";
+            }
+            else
+            {
+                ledgerReport.BalanceDirection = "Debt";
+            }
+            ledgerReport.RowSumAmount = Math.Abs(ledgerReport.RowSumAmount);
+        }
+    }
+}

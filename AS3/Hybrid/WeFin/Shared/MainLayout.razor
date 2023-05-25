@@ -1,0 +1,23 @@
+﻿@using WeFin.Models
+@inherits LayoutComponentBase
+
+<div class="page">
+
+    @if (Setting.UserBasicDetail != null)
+    {
+        <NavMenu />
+    } 
+
+    <main>
+        
+        <!--
+        <div class="top-row px-4">
+        </div>
+        -->
+
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
