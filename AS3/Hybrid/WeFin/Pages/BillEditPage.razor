@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label>
-                Bill Type:
+                Bill Type<font color=red>*</font>:
             </label>
             <InputSelect class="form-control" @bind-Value="bill.BillType">
                 <option value="">-- Select Bill Type --</option>
@@ -36,7 +36,7 @@
         </div>
         <div class="form-group">
             <label>
-                Bill Date:
+                Bill Date<font color=red>*</font>:
             </label>
             <InputDate class="form-control" @bind-Value="bill.BillDate" />            
         </div>
@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
             <label>
-                Bill Direction:
+                Bill Direction<font color=red>*</font>:
             </label>
             <InputRadioGroup class="form-control" Name="billDirection" @bind-Value="bill.BillDirection">
                 <label>
@@ -67,7 +67,7 @@
         </div>
         <div class="form-group">
             <label>
-                Bill Amount:
+                Bill Amount<font color=red>*</font>:
             </label>
             <Input type="Number" class="form-control" @bind-Value="bill.BillAmount" />
             <ValidationMessage For="() => bill.BillAmount"></ValidationMessage>   

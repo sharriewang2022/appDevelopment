@@ -20,6 +20,8 @@ namespace WeFin.Models
         [StringLength(30, ErrorMessage = "BillType length can't be more than 30.")]
         public string BillType { get; set; }
 
+        public string Abstract { get; set; }
+
         public string BalanceDirection { get; set; }
 
         public decimal TotalIncome { get; set; }

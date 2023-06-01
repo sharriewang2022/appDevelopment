@@ -1,6 +1,9 @@
 ﻿@page "/journalpage"
 @using WeFin.Data
 @using WeFin.Models
+@using AntDesign
+@using AntDesign.TableModels
+@using System.Text.Json
 @inject BillDBService billDBService
 @inject BillTypeDBService billTypeDBService
 @inject NavigationManager navigationManager
@@ -36,16 +39,16 @@
                     }
                 </InputSelect>
                 Bill Type:
-                <InputSelect class="form-control" @bind-Value="reportCondition.BillType">
+                <InputSelect @bind-Value="reportCondition.BillType">
                     <option value=""></option>
                     @foreach (var billType in billTypeList)
                     {
                     <option value="@billType.BillTypeName">@billType.BillTypeName</option>
                     }                   
                 </InputSelect>
+                <button class="btn btn-primary" @onclick="generateJournal">Search</button>
             </label>
-        </div>
-        <button class="btn btn-primary" @onclick="generateJournal">Search</button>
+        </div>        
     </EditForm>
 </div>
 
@@ -55,61 +58,79 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Bill Date</th>
-                <th>Bill Type</th>
-                <th>Bill No</th>
-                <th>Bill Name</th>
-                <th>Account Number</th>
-                <th>Abstract</th>
-                <th>Income</th>
-                <th>Payment</th>
-                <th>Balance direction</th>
-                <th>Balance</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var bill in bills)
-            {
-                <tr>
-                    <td>@bill.BillDate.ToShortDateString()</td>
-                    <td>@bill.BillType</td>
-                    <td>@bill.BillNo</td>
-                    <td>@bill.BillName</td>
-                    <td>@bill.AccountNo</td>
-                    <td>@bill.BillAbstract</td>
-                    <td>@bill.Income</td>
-                    <td>@bill.Payment</td>
-                    <td>@bill.BillDirection</td>
-                    <td>@bill.RowSumAmount</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <Table @ref="table"
+       TItem="Bill"
+       DataSource="@bills"
+       Total="_total"
+       @bind-PageIndex="_pageIndex"
+       @bind-PageSize="_pageSize"
+       @bind-SelectedRows="selectedRows"
+       RowClassName="@(x =>{ i=1-i; return i==0?"evenrow":""; })"
+       OnChange="OnChange">
+        <Selection Key="@(context.Id.ToString())" />
+        <PropertyColumn Property="c=>c.Id" Sortable Hidden />
+        <PropertyColumn Title="Bill Date" Property="c=>c.BillDate" Format="yyyy-MM-dd" />
+        <PropertyColumn Title="Bill Type" Property="c=>c.BillType"  />        
+        <PropertyColumn Title="Bill Number" Property="c=>c.BillNo"  />
+        <PropertyColumn Title="Bill Name" Property="c=>c.BillName"  />
+        <PropertyColumn Title="Abstract" Property="c=>c.BillAbstract"  />
+        <PropertyColumn Title="Income" Property="c=>c.Income"  />
+        <PropertyColumn Title="Payment" Property="c=>c.Payment"  />
+        <PropertyColumn Title="Balance Direction" Property="c=>c.BalanceDirection"  />
+        <PropertyColumn Title="Balance" Property="c=>c.RowSumAmount"  />        
+        <ActionColumn>
+        </ActionColumn>
+    </Table>
+    <br />
+    <p>PageIndex: @_pageIndex | PageSize: @_pageSize | Total: @_total</p>
+
+    <br />
+
+    <Button Type="@ButtonType.Primary" OnClick="()=> { _pageIndex--; }">Previous page</Button>
+    <Button Type="@ButtonType.Primary" OnClick="()=> { _pageIndex++; }">Next Page</Button>
+
+    <style>
+        .evenrow {
+            background-color: lightblue;
+        }
+    </style>    
 }
 
 @code {
     private string Message = String.Empty;
-
     private List<Bill> bills;
-    // whole domain definition
-    private ReportCondition reportCondition = new()
-    {
-    };
+    IEnumerable<Bill> selectedRows;
+    ITable table;
+    int _pageIndex = 1;
+    int _pageSize = 10;
+    int _total = 20;
+    int i = 0;
 
     List<BillType> billTypeList = new List<BillType>();
     int[] yearArray = new int[] { 2018, 2019, 2020, 2022, 2023};
     int[] monthArray = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+
+    // whole domain definition
+    private ReportCondition reportCondition = new()
+    {
+        Year = DateTime.Today.Year,
+        StartMonth = DateTime.Today.Month,
+        EndMonth = DateTime.Today.Month
+    };
 
     protected override async Task OnInitializedAsync()
     {
         billTypeList = await billTypeDBService.GetAllBillTypesAsync();
         Message = String.Empty;
     }
+
+    public void OnChange(QueryModel<Bill> queryModel)
+    {
+        Console.WriteLine(JsonSerializer.Serialize(queryModel));
+    }
     private async Task OnValidSubmit(EditContext editContext)
     {
+        //bill.BillDate.ToShortDateString()
         ValidateData(editContext);
     }
     /*
@@ -129,6 +150,10 @@ else
     private async Task generateJournal()
     {
         bills = await billDBService.GetBillJournalReportAsync(reportCondition);
+        if (bills == null || bills.Count == 0 )
+        {
+            return;
+        }
         int oldBillMonth = bills[0].BillMonth;
         int currentBillMonth;
         decimal incomeSumAmount = 0; // year sum
@@ -171,7 +196,20 @@ else
                 paymentMonthSumAmount += bill.BillAmount;
             }
             rowSumAmount = rowSumAmount + incomeSumAmount - paymentSumAmount;
+            if (rowSumAmount > 0)
+            {
+                bill.BalanceDirection = "Profit";
+            }
+            else if (rowSumAmount == 0)
+            {
+                bill.BalanceDirection = "Balance";
+            }
+            else
+            {
+                bill.BalanceDirection = "Debt";
+            }
             bill.RowSumAmount = rowSumAmount;
+            bill.RowSumAmount = Math.Abs(rowSumAmount);
         }
     }
 }

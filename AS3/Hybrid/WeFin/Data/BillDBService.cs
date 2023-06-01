@@ -50,31 +50,32 @@ public class BillDBService
                      + " and t.BillMonth >= " + reportCondition.StartMonth
                      + " and t.BillMonth <= " + reportCondition.EndMonth;
 
-            if (String.IsNullOrEmpty(reportCondition.BillDirection))
+            if (!String.IsNullOrEmpty(reportCondition.BillDirection))
             {
                 sql += " and t.BillDirection = " + reportCondition.BillDirection;
             }
-            if (String.IsNullOrEmpty(reportCondition.BillNo))
+            if (!String.IsNullOrEmpty(reportCondition.BillNo))
             {
                 sql += " and t.BillNo = '" + reportCondition.BillNo + "'";
             }
-            if (String.IsNullOrEmpty(reportCondition.BillType))
+            if (!String.IsNullOrEmpty(reportCondition.BillType))
             {
                 sql += " and t.BillType = '" + reportCondition.BillType +"'";
             }
-            if (String.IsNullOrEmpty(reportCondition.BillName))
+            if (!String.IsNullOrEmpty(reportCondition.BillName))
             {
                 sql += " and t.BillName like '" + reportCondition.BillName + "'%";
             }
-            if (String.IsNullOrEmpty(reportCondition.BillAbstract))
+            if (!String.IsNullOrEmpty(reportCondition.BillAbstract))
             {
                 sql += " and t.BillAbstract like '" + reportCondition.BillAbstract + "'%";
             }
-            if (String.IsNullOrEmpty(reportCondition.Remark))
+            if (!String.IsNullOrEmpty(reportCondition.Remark))
             {
                 sql += " and t.Remark like '" + reportCondition.Remark + "'%";
             }
             List<Bill> BillList = await conn.QueryAsync<Bill>(sql);
+            return BillList;
         }
         catch (Exception ex)
         {
@@ -92,15 +93,16 @@ public class BillDBService
             // get bills total amount in the reportCondition 
             String sql = "SELECT t.BillYear,t.AccountNo,t.BillMonth,sum(t.income) TotalIncome, sum(t.Payment) TotalPayment"
                 + " FROM gl_bill t WHERE t.BillYear = " + reportCondition.Year
-                + " and t.BillMonth >= " + reportCondition.StartMonth
-                + " and t.BillMonth <= " + reportCondition.EndMonth
-                + " and t.AccountNo = '" + Setting.UserBasicDetail.AccountNo +"'";
+                + " AND t.BillMonth >= " + reportCondition.StartMonth
+                + " AND t.BillMonth <= " + reportCondition.EndMonth
+                + " AND t.AccountNo = '" + Setting.UserBasicDetail.AccountNo +"'";
 
-            if (String.IsNullOrEmpty(reportCondition.BillType))
+            if (!String.IsNullOrEmpty(reportCondition.BillType))
             {
-                sql += " and t.BillType = '" + reportCondition.BillType + "'";
+                sql += " AND t.BillType = '" + reportCondition.BillType + "'";
             }
-            sql += "' group by t.BillYear,t.AccountNo,t.BillMonth";
+           
+            sql += " GROUP BY t.BillYear,t.AccountNo,t.BillMonth";           
             List<LedgerReportEntity> ledgerList = await conn.QueryAsync<LedgerReportEntity>(sql);
             return ledgerList;
         }
@@ -142,7 +144,7 @@ public class BillDBService
             if (null == bill)
                 throw new Exception("Valid bill information required");
             // save a bill         
-            if (bill.IsAdd != 0)
+            if (bill.IsAdd == 0)
             {
                 return await conn.UpdateAsync(bill);
             }

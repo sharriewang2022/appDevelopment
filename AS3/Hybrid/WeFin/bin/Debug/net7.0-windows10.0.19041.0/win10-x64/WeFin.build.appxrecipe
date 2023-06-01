@@ -1948,6 +1948,9 @@
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeFin\wwwroot\favicon.ico">
       <PackagePath>wwwroot\favicon.ico</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeFin\wwwroot\images\user.png">
+      <PackagePath>wwwroot\images\user.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\appDevelopment\AS3\Hybrid\WeFin\wwwroot\index.html">
       <PackagePath>wwwroot\index.html</PackagePath>
     </AppxPackagedFile>

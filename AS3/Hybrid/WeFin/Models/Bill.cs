@@ -45,6 +45,8 @@ namespace WeFin.Models
         //for journal report
         public decimal Payment { get; set; }
 
+        public string BalanceDirection { get; set; }
+
         public decimal RowSumAmount { get; set; }
 
         [StringLength(200, ErrorMessage = "Bill Abstract length can't be more than 200.")]

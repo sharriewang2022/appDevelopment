@@ -1,6 +1,9 @@
 ﻿@page "/ledgerpage"
 @using WeFin.Data
 @using WeFin.Models
+@using AntDesign
+@using AntDesign.TableModels
+@using System.Text.Json
 @inject BillDBService billDBService
 @inject BillTypeDBService billTypeDBService
 @inject NavigationManager navigationManager
@@ -37,16 +40,16 @@
                     }
                 </InputSelect>
                 Bill Type:
-                <InputSelect class="form-control" @bind-Value="reportCondition.BillType">
+                <InputSelect @bind-Value="reportCondition.BillType">
                     <option value=""></option>
                     @foreach (var billType in billTypeList)
                     {
                         <option value="@billType.BillTypeName">@billType.BillTypeName</option>
                     }
                 </InputSelect>
+                <button class="btn btn-primary" @onclick="generateLedger">Search</button>
             </label>
-        </div>
-        <button class="btn btn-primary" @onclick="generateJournal">Search</button>
+        </div>        
     </EditForm>
 </div>
 
@@ -56,44 +59,58 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Year</th>
-                <th>Month</th>
-                <th>Abstract</th>
-                <th>Account Number</th>
-                <th>Total Income</th>
-                <th>Total Payment</th>
-                <th>Balance direction</th>
-                <th>Balance</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var ledgerReport in ledgerReportList)
-            {
-                <tr>
-                    <td>@ledgerReport.BillYear</td>
-                    <td>@ledgerReport.BillMonth</td>
-                    <td>Current period</td>
-                    <td>@ledgerReport.AccountNo</td>
-                    <td>@ledgerReport.TotalIncome</td>
-                    <td>@ledgerReport.TotalPayment</td>
-                    <td>@ledgerReport.BalanceDirection</td>
-                    <td>@ledgerReport.RowSumAmount</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <Table @ref="table"
+       TItem="LedgerReportEntity"
+       DataSource="@ledgerReportList"
+       Total="_total"
+       @bind-PageIndex="_pageIndex"
+       @bind-PageSize="_pageSize"
+       @bind-SelectedRows="selectedRows"
+       RowClassName="@(x =>{ i=1-i; return i==0?"evenrow":""; })"
+       OnChange="OnChange">
+        <PropertyColumn Title="Year" Property="c=>c.BillYear" />
+        <PropertyColumn Title="Month" Property="c=>c.BillMonth" />
+        <PropertyColumn Title="Abstract" Property="c=>c.Abstract" />
+        <PropertyColumn Title="Total Income" Property="c=>c.TotalIncome" />
+        <PropertyColumn Title="Total Payment" Property="c=>c.TotalPayment" />
+        <PropertyColumn Title="Balance Direction" Property="c=>c.BalanceDirection" />
+        <PropertyColumn Title="Balance" Property="c=>c.RowSumAmount" />
+        
+        <ActionColumn>
+        </ActionColumn>
+    </Table>
+    <br />
+    <p>PageIndex: @_pageIndex | PageSize: @_pageSize | Total: @_total</p>
+
+    <br />
+
+    <Button Type="@ButtonType.Primary" OnClick="()=> { _pageIndex--; }">Previous page</Button>
+    <Button Type="@ButtonType.Primary" OnClick="()=> { _pageIndex++; }">Next Page</Button>
+
+    <style>
+        .evenrow {
+            background-color: lightblue;
+        }
+    </style>
 }
 
 @code {
     private string Message = String.Empty;
 
     private List<LedgerReportEntity> ledgerReportList;
+    IEnumerable<LedgerReportEntity> selectedRows;
+    ITable table;
+    int _pageIndex = 1;
+    int _pageSize = 10;
+    int _total = 20;
+    int i = 0;
+
     // whole domain definition
     private ReportCondition reportCondition = new()
     {
+        Year = DateTime.Today.Year,
+        StartMonth = DateTime.Today.Month,
+        EndMonth = DateTime.Today.Month
     };
 
     List<BillType> billTypeList = new List<BillType>();
@@ -105,6 +122,12 @@ else
         billTypeList = await billTypeDBService.GetAllBillTypesAsync();
         Message = String.Empty;
     }
+
+    public void OnChange(QueryModel<LedgerReportEntity> queryModel)
+    {
+        Console.WriteLine(JsonSerializer.Serialize(queryModel));
+    }
+
     private async Task OnValidSubmit(EditContext editContext)
     {
         ValidateData(editContext);
@@ -123,35 +146,54 @@ else
         return Message;
     }
 
-    private async Task generateJournal()
+    private async Task generateLedger()
     {
         ledgerReportList = await billDBService.GetBillsLedgerSumAsync(reportCondition);
-        int oldBillMonth = ledgerReportList[0].BillMonth;
-        int currentBillMonth;
-        decimal incomeSumAmount = 0; // year sum
-        decimal paymentSumAmount = 0;
-        decimal rowSumAmount = 0; // the money summary in last column in each row
-        decimal incomeMonthSumAmount = 0;
-        decimal paymentMonthSumAmount = 0;
-        foreach (LedgerReportEntity ledgerReport in ledgerReportList)
+        if (ledgerReportList == null || ledgerReportList.Count == 0)
         {
-            incomeMonthSumAmount = ledgerReport.TotalIncome;
-            paymentMonthSumAmount = ledgerReport.TotalPayment;
+            return;
+        }
 
-            ledgerReport.RowSumAmount = rowSumAmount + ledgerReport.TotalIncome - ledgerReport.TotalPayment;
-            if (ledgerReport.RowSumAmount > 0)
+        decimal rowSumAmount = 0; // the money summary in last column in each row
+        decimal incomeYearSumAmount = 0;
+        decimal paymenYearSumAmount = 0;
+        foreach (LedgerReportEntity ledgerReport in ledgerReportList)
+        {            
+            ledgerReport.Abstract = "current period total";
+            rowSumAmount += ledgerReport.TotalIncome - ledgerReport.TotalPayment;
+            // set each month row balance column
+            ledgerReport.RowSumAmount = rowSumAmount;
+            
+            incomeYearSumAmount += ledgerReport.TotalIncome;
+            paymenYearSumAmount += ledgerReport.TotalPayment;
+            //add year money summary row
+            LedgerReportEntity yearLedgerRow = new LedgerReportEntity{ };
+            yearLedgerRow.BillYear = ledgerReport.BillYear;
+            yearLedgerRow.BillMonth = ledgerReport.BillMonth;
+            yearLedgerRow.Abstract = "ccumulative total"; // year sum row
+            yearLedgerRow.TotalIncome = incomeYearSumAmount;
+            yearLedgerRow.TotalPayment = paymenYearSumAmount;         
+
+            if (rowSumAmount > 0)
             {
                 ledgerReport.BalanceDirection = "Profit";
+                yearLedgerRow.BalanceDirection = "Profit";
             }
-            else if (ledgerReport.RowSumAmount == 0)
+            else if (rowSumAmount == 0)
             {
                 ledgerReport.BalanceDirection = "Balance";
+                yearLedgerRow.BalanceDirection = "Balance";
             }
             else
             {
                 ledgerReport.BalanceDirection = "Debt";
+                yearLedgerRow.BalanceDirection = "Debt";
             }
-            ledgerReport.RowSumAmount = Math.Abs(ledgerReport.RowSumAmount);
+            ledgerReport.RowSumAmount = Math.Abs(rowSumAmount);
+            yearLedgerRow.RowSumAmount = Math.Abs(rowSumAmount);
+
+            // add year sum row
+            ledgerReportList.Add(yearLedgerRow);
         }
     }
 }

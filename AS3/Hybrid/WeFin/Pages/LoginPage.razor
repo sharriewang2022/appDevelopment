@@ -29,21 +29,21 @@
         <div style="border:dashed 0px; color:red;">@Message</div>
         <div class="form-group">
             <label>
-                User Name:
+                User Name<font color=red>*</font>:
             </label>
             <InputText class="form-control" @bind-Value="userLogin.UserName" OnBlur="GetAccountNos" />
             <ValidationMessage For="() => userLogin.UserName"></ValidationMessage>
         </div>
         <div class="form-group">
             <label>
-                User Password:
+                User Password<font color=red>*</font>:
             </label>
             <InputPassword class="form-control" @bind-Value="userLogin.UserPassword" OnBlur="GetAccountNos" />
             <ValidationMessage For="() => userLogin.UserPassword"></ValidationMessage>
         </div>
         <div class="form-group">
             <label>
-                Account Number:
+                Account Number<font color=red>*</font>:
             </label>
             <InputSelect class="form-control" @bind-Value="userLogin.AccountNo">
                 <option value="">-- Select Account Number --</option>
