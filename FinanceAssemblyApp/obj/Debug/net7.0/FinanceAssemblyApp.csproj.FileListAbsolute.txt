@@ -1,6 +1,0 @@
-D:\Users\wangsy1\source\repos\FinanceAssemblyApp\obj\Debug\net7.0\FinanceAssemblyApp.csproj.AssemblyReference.cache
-D:\Users\wangsy1\source\repos\FinanceAssemblyApp\obj\Debug\net7.0\FinanceAssemblyApp.GeneratedMSBuildEditorConfig.editorconfig
-D:\Users\wangsy1\source\repos\FinanceAssemblyApp\obj\Debug\net7.0\FinanceAssemblyApp.AssemblyInfoInputs.cache
-D:\Users\wangsy1\source\repos\FinanceAssemblyApp\obj\Debug\net7.0\FinanceAssemblyApp.AssemblyInfo.cs
-D:\Users\wangsy1\source\repos\FinanceAssemblyApp\obj\Debug\net7.0\FinanceAssemblyApp.csproj.CoreCompileInputs.cache
-D:\Users\wangsy1\source\repos\FinanceAssemblyApp\obj\Debug\net7.0\FinanceAssemblyApp.MvcApplicationPartsAssemblyInfo.cache
