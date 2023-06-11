@@ -58,10 +58,10 @@
             </label>
             <InputRadioGroup class="form-control" Name="billDirection" @bind-Value="bill.BillDirection">
                 <label>
-                    <InputRadio Name="billDirection" Value=1></InputRadio>income
+                    <InputRadio Name="billDirection" Value=1></InputRadio>Income
                 </label>
                 <label>
-                    <InputRadio Name="billDirection" Value="0"></InputRadio>payment
+                    <InputRadio Name="billDirection" Value="-1" checked></InputRadio>Payment
                 </label>                   
             </InputRadioGroup>            
         </div>
@@ -94,19 +94,19 @@
 
 @code {
     // this bill is default new 
-    private int isNewAdd = 0;
+    private int isNewAdd = 1;
     private string Message = String.Empty;
     // whole domain definition
     private Bill bill = new()
         {
-            BillDate = DateTime.Today
+            BillDate = DateTime.Today,
+            AccountNo = Setting.UserBasicDetail.AccountNo
         };
 
     List<BillType> billTypeList = new List<BillType>();
 
     protected override async Task OnInitializedAsync()
     {
-        bill.AccountNo = Setting.UserBasicDetail.AccountNo;
         billTypeList = await billTypeDBService.GetAllBillTypesAsync();
         Message = String.Empty;
     }
@@ -172,16 +172,15 @@
         // this bill is new
         isNewAdd = 1;
         bill = new()
-            {
-                BillDate = DateTime.Today
-            };
-
+        {
+            BillDate = DateTime.Today,
+            AccountNo = Setting.UserBasicDetail.AccountNo
+        };
     }
     private void EditBill()
     {
         // this bill is not new, is updated
         isNewAdd = 0;
-
     }
     private async Task<int> DeleteBill()
     {

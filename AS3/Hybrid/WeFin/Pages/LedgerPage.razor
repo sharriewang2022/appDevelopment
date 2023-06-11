@@ -25,6 +25,10 @@
                         <option value="@year">@year</option>
                     }
                 </InputSelect>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="form-control">
                 Start Month:
                 <InputSelect @bind-Value="reportCondition.StartMonth">
                     @foreach (var startMonth in monthArray)
@@ -39,6 +43,10 @@
                         <option value="@endMonth">@endMonth</option>
                     }
                 </InputSelect>
+            </label>
+        </div>
+        <div class="form-group">
+            <label class="form-control">
                 Bill Type:
                 <InputSelect @bind-Value="reportCondition.BillType">
                     <option value=""></option>
@@ -49,7 +57,7 @@
                 </InputSelect>
                 <button class="btn btn-primary" @onclick="generateLedger">Search</button>
             </label>
-        </div>        
+        </div>
     </EditForm>
 </div>
 
@@ -68,6 +76,7 @@ else
        @bind-SelectedRows="selectedRows"
        RowClassName="@(x =>{ i=1-i; return i==0?"evenrow":""; })"
        OnChange="OnChange">
+
         <PropertyColumn Title="Year" Property="c=>c.BillYear" />
         <PropertyColumn Title="Month" Property="c=>c.BillMonth" />
         <PropertyColumn Title="Abstract" Property="c=>c.Abstract" />
@@ -102,7 +111,7 @@ else
     ITable table;
     int _pageIndex = 1;
     int _pageSize = 10;
-    int _total = 20;
+    int _total = 0;
     int i = 0;
 
     // whole domain definition
@@ -133,7 +142,7 @@ else
         ValidateData(editContext);
     }
     /*
-    * valid the bill information
+    * valid the ledger information
     */
     private String ValidateData(EditContext editContext)
     {
@@ -153,12 +162,14 @@ else
         {
             return;
         }
+        List<LedgerReportEntity> ledgerReportNewList = new List<LedgerReportEntity>();
 
         decimal rowSumAmount = 0; // the money summary in last column in each row
         decimal incomeYearSumAmount = 0;
         decimal paymenYearSumAmount = 0;
-        foreach (LedgerReportEntity ledgerReport in ledgerReportList)
-        {            
+        for (int i = 0; i < ledgerReportList.Count; i++)
+        {
+            LedgerReportEntity ledgerReport = ledgerReportList[i];
             ledgerReport.Abstract = "current period total";
             rowSumAmount += ledgerReport.TotalIncome - ledgerReport.TotalPayment;
             // set each month row balance column
@@ -193,7 +204,10 @@ else
             yearLedgerRow.RowSumAmount = Math.Abs(rowSumAmount);
 
             // add year sum row
-            ledgerReportList.Add(yearLedgerRow);
-        }
+            ledgerReportNewList.Add(ledgerReport);
+            ledgerReportNewList.Add(yearLedgerRow);
+        }        
+        ledgerReportList = ledgerReportNewList;
+        _total = ledgerReportList.Count;
     }
 }

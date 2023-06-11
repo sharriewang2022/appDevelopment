@@ -10,7 +10,7 @@
 
 
 <PageTitle>LoginPage</PageTitle>
-<h3>Login to Access Application</h3>
+<h3>Log In</h3>
 
 <!--
 <div class="alert alert-info">
@@ -74,13 +74,13 @@
 @code {
 
     // this bill is default new
-    private int isNewAdd = 0;
+    //private int isNewAdd = 0;
+    //private bool isLoginSuccess = false;
     private string Message = String.Empty;
     private String _spinnerClass = "";
-    private bool isLoginSuccess = false;
 
     //jwtToken is not used
-    private string jwtToken = null;
+    //private string jwtToken = null;
     CustomAuthenticationStateProvider customAuthenticationStateProvider = new();
 
     List<UserLogin> accountNoList = new List<UserLogin>();
@@ -119,7 +119,7 @@
                 UserID = userLogin.UserName,
                 AccountNo = userLogin.AccountNo
             };
-            SuccessLogin(defaultUserBasicDetail);
+            await SuccessLogin(defaultUserBasicDetail);
         }
 
         //Call login and redirect
@@ -138,12 +138,12 @@
         //default user 
         if (userLogin.UserName.Equals("sa") && userLogin.UserPassword.Equals("1"))
         {
-            jwtToken = "123456";
+            //jwtToken = "123456";
             return true;
         }
 
         //Not valid
-        jwtToken = null;
+        //jwtToken = null;
         userLogin.LoginFailureHidden = false;
         return false;
     }
@@ -163,22 +163,23 @@
                              + "\"}";
         if (userInfo != null && !String.IsNullOrEmpty(userInfo.UserName))
         {
-            isLoginSuccess = true;
+            //isLoginSuccess = true;
 
             //Json string change to Array or Model
             var tokenResponse = JsonConvert.DeserializeObject<UserLogin>(userLoginResponseInfo);
 
             /*
-             * JWT token have 3 parts, and need Base64, could not be random number
-            var handler = new JwtSecurityTokenHandler();
-            var jsontoken = handler.ReadToken(tokenResponse.AccessToken) as JwtSecurityToken;
-            string userID = jsontoken.Claims.FirstOrDefault(f => f.Type == JwtRegisteredClaimNames.NameId).Value;
-            string name = jsontoken.Claims.FirstOrDefault(f => f.Type == JwtRegisteredClaimNames.Name).Value;
-            string userAvatar = jsontoken.Claims.FirstOrDefault(f => f.Type == "UserAvatar").Value;
+            * JWT token have 3 parts, and need Base64, could not be random number
+           var handler = new JwtSecurityTokenHandler();
+           var jsontoken = handler.ReadToken(tokenResponse.AccessToken) as JwtSecurityToken;
+           string userID = jsontoken.Claims.FirstOrDefault(f => f.Type == JwtRegisteredClaimNames.NameId).Value;
+           string name = jsontoken.Claims.FirstOrDefault(f => f.Type == JwtRegisteredClaimNames.Name).Value;
+           string userAvatar = jsontoken.Claims.FirstOrDefault(f => f.Type == "UserAvatar").Value;
             */
             string userID = userInfo.UserID;
             string name = userInfo.UserName;
             string email = userInfo.Email;
+            string accountNo = userLogin.AccountNo;
 
             var userBasicDetail = new UserBasicDetail
                 {
@@ -188,14 +189,26 @@
                     RefreshToken = tokenResponse.RefreshToken,
                     UserAvatar = "",
                     UserID = userID,
-                    AccountNo = userLogin.AccountNo
+                    AccountNo = accountNo
                 };
 
             //Model change to Json string
             string userBasicInfoStr = JsonConvert.SerializeObject(userBasicDetail);
             //store token 
             await SecureStorage.SetAsync(nameof(Setting.UserBasicDetail), userBasicInfoStr);
-            Setting.UserBasicDetail = userBasicDetail;
+            Setting.UserBasicDetail = new UserBasicDetail
+                {
+                    Email = email,
+                    Name = name,
+                    AccessToken = tokenResponse.AccessToken,
+                    RefreshToken = tokenResponse.RefreshToken,
+                    UserAvatar = "",
+                    UserID = userID,
+                    AccountNo = accountNo
+                };
+
+            //Setting.UserBasicDetail = userBasicDetail.;
+
 
             navigationManager.NavigateTo("/welcomepage");
         }

@@ -54,9 +54,9 @@
 @code {
 
     // this bill is default new
+    //private string _spinnerClass = "";
     private int isNewAdd = 1;
     private string Message = String.Empty;
-    private string _spinnerClass = "";
     private string _userAvatar = "images/user.png";
     private string _imageBase64Data;
     // whole domain definition
@@ -125,7 +125,7 @@
 
     private async void Submit()
     {
-        _spinnerClass = "spinner-border spinner-border-sm";
+       // _spinnerClass = "spinner-border spinner-border-sm";
 
         if (!string.IsNullOrWhiteSpace(_imageBase64Data))
         {
@@ -141,7 +141,7 @@
         {
             await App.Current.MainPage.DisplayAlert("Oops", "", "OK");
         }
-        _spinnerClass = "";
+        //_spinnerClass = "";
         this.StateHasChanged();
     }
 
