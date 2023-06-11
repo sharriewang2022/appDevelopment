@@ -16,7 +16,7 @@ namespace WeFin.Models
         [StringLength(30, ErrorMessage = "BillType length can't be more than 30.")]
         public string BillType { get; set; }
 
-        [System.ComponentModel.DataAnnotations.MaxLength(50), Unique]
+        [System.ComponentModel.DataAnnotations.MaxLength(50)]
         public string BillNo { get; set; }
 
         [System.ComponentModel.DataAnnotations.MaxLength(200)]
@@ -30,7 +30,7 @@ namespace WeFin.Models
 
         public int BillYear { get; set; }
 
-        // 1:income; 0:payment
+        // 1:income; -1:payment
         [Required]
         public int BillDirection { get; set; }
 

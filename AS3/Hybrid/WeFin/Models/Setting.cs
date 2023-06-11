@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeFin.Models
 {
-    internal class Setting
+    public class Setting
     {
         public static UserBasicDetail UserBasicDetail { get; set; }
     }
