@@ -19,7 +19,7 @@ public class BillTypeDBService
     {
         "salary","business cost", "material fees", "journey costs", "entertainment fees",
         "education fees", "property fees", "water costs", "electricity costs",
-        "heating costs", "Fuel cost", "others"
+        "heating costs", "fuel cost", "others"
     };
 
     public BillTypeDBService()

@@ -35,6 +35,7 @@ public class BillDBService
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            throw new Exception(nameof(ex) + StatusMessage);
         }
         return new List<Bill>();
     }
@@ -47,8 +48,10 @@ public class BillDBService
             await Init();
             // get some bills in the reportCondition 
             String sql = "SELECT * FROM gl_bill t WHERE t.BillYear = " + reportCondition.Year
+                     + " and t.AccountNo = '" + Setting.UserBasicDetail.AccountNo +"'"
                      + " and t.BillMonth >= " + reportCondition.StartMonth
                      + " and t.BillMonth <= " + reportCondition.EndMonth;
+
 
             if (!String.IsNullOrEmpty(reportCondition.BillDirection))
             {
@@ -74,12 +77,14 @@ public class BillDBService
             {
                 sql += " and t.Remark like '" + reportCondition.Remark + "'%";
             }
+            sql += " order by BillDate,_id";
             List<Bill> BillList = await conn.QueryAsync<Bill>(sql);
             return BillList;
         }
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to get some bill data. {0}", ex.Message);
+            Console.WriteLine(nameof(ex) + StatusMessage);
         }
         return new List<Bill>();        
     }
@@ -109,6 +114,7 @@ public class BillDBService
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to get some ledger data. {0}", ex.Message);
+            Console.WriteLine((nameof(ex) + StatusMessage));
         }
         return new List<LedgerReportEntity>();
     }
@@ -128,6 +134,7 @@ public class BillDBService
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            Console.WriteLine((nameof(ex) + StatusMessage));
         }
         return new Bill();
     }
@@ -156,6 +163,7 @@ public class BillDBService
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            Console.WriteLine((nameof(ex) + StatusMessage));
         }
         return result;
     }
@@ -177,6 +185,7 @@ public class BillDBService
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+            Console.WriteLine((nameof(ex) + StatusMessage));
         }
         return result;
     }
