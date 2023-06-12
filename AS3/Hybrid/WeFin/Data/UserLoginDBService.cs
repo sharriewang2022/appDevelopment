@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace WeFin.Data;
 
-public class UserRegisterDBService
+public class UserLoginDBService
 {
     private SQLiteAsyncConnection conn;
     private string StatusMessage = "";
@@ -72,6 +72,26 @@ public class UserRegisterDBService
             // save a UserRegisterType         
             return await conn.Table<UserRegister>().
                 Where(i => i.UserName == userName && i.UserPassword == userPassword).FirstOrDefaultAsync();
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+        }
+        return new UserRegister();
+    }
+
+    public async Task<UserRegister> GetUserByNamePwdAccount(String userName, String userPassword, String acountNo)
+    {
+        try
+        {
+            // connect database
+            await Init();
+            // basic validation to ensure an User exist
+            if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(userPassword) || String.IsNullOrEmpty(acountNo))
+                throw new Exception("Valid user login information required");
+            // save a UserRegisterType         
+            return await conn.Table<UserRegister>().
+                Where(i => i.UserName == userName && i.UserPassword == userPassword && i.AccountNo == acountNo).FirstOrDefaultAsync();
         }
         catch (Exception ex)
         {

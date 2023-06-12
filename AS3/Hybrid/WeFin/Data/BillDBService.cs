@@ -25,12 +25,12 @@ public class BillDBService
         await conn.CreateTableAsync<Bill>();
     }
 
-    public async Task<List<Bill>> GetAllBillsAsync(String accountNo)
+    public async Task<List<Bill>> GetAllBillsAsync(String userID, String accountNo)
     {
         try
         {
             await Init();
-            return await conn.Table<Bill>().Where(t => t.AccountNo == accountNo).ToListAsync();
+            return await conn.Table<Bill>().Where(t => t.AccountNo == accountNo && t.UserID == userID).OrderBy(t=>t.BillDate).ToListAsync();
         }
         catch (Exception ex)
         {
@@ -49,6 +49,7 @@ public class BillDBService
             // get some bills in the reportCondition 
             String sql = "SELECT * FROM gl_bill t WHERE t.BillYear = " + reportCondition.Year
                      + " and t.AccountNo = '" + Setting.UserBasicDetail.AccountNo +"'"
+                     + " and t.UserID = '" + Setting.UserBasicDetail.UserID + "'"
                      + " and t.BillMonth >= " + reportCondition.StartMonth
                      + " and t.BillMonth <= " + reportCondition.EndMonth;
 
@@ -100,7 +101,8 @@ public class BillDBService
                 + " FROM gl_bill t WHERE t.BillYear = " + reportCondition.Year
                 + " AND t.BillMonth >= " + reportCondition.StartMonth
                 + " AND t.BillMonth <= " + reportCondition.EndMonth
-                + " AND t.AccountNo = '" + Setting.UserBasicDetail.AccountNo +"'";
+                + " AND t.AccountNo = '" + Setting.UserBasicDetail.AccountNo +"'"
+                + " AND t.UserID = '" + Setting.UserBasicDetail.UserID + "'";
 
             if (!String.IsNullOrEmpty(reportCondition.BillType))
             {
