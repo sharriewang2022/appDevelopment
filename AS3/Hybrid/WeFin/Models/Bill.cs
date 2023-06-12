@@ -12,6 +12,8 @@ namespace WeFin.Models
 
         public string AccountNo { get; set; }
 
+        public string UserID { get; set; }
+
         [Required]
         [StringLength(30, ErrorMessage = "BillType length can't be more than 30.")]
         public string BillType { get; set; }
@@ -33,6 +35,8 @@ namespace WeFin.Models
         // 1:income; -1:payment
         [Required]
         public int BillDirection { get; set; }
+
+        public String BillDirectionName { get; set; }
 
         public DateTime InputDate { get; set; }
 
