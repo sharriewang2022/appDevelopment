@@ -24,13 +24,14 @@ public static class MauiProgram
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();
+        builder.Logging.SetMinimumLevel(LogLevel.Warning);
 #endif
         //import AntDesign
         builder.Services.AddAntDesign();
 
         builder.Services.AddSingleton<BillDBService>();
         builder.Services.AddSingleton<BillTypeDBService>();
-        builder.Services.AddSingleton<UserRegisterDBService>();
+        builder.Services.AddSingleton<UserLoginDBService>();
 
         builder.Services.TryAddScoped<AuthenticationStateProvider, ExternalAuthStateProvider>();
 
