@@ -32,7 +32,7 @@ else
                     <td>@bill.BillType</td>
                     <td>@bill.BillNo</td>
                     <td>@bill.BillDate.ToShortDateString()</td>
-                    <td>@bill.BillDirection</td>
+                    <td>@bill.BillDirectionName</td>
                     <td>@bill.BillAmount</td>
                     <td>@bill.BillAbstract</td>
                     <td>@bill.Remark</td>
@@ -47,12 +47,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        bills = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.AccountNo);
+        bills = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.UserID, Setting.UserBasicDetail.AccountNo);
     }
 
     private async Task<List<Bill>> GetAllBills()
     {
-        bills = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.AccountNo);
+        bills = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.UserID, Setting.UserBasicDetail.AccountNo);
         return bills;
     }
 }

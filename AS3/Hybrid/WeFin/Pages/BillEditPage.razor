@@ -61,7 +61,7 @@
                     <InputRadio Name="billDirection" Value=1></InputRadio>Income
                 </label>
                 <label>
-                    <InputRadio Name="billDirection" Value="-1" checked></InputRadio>Payment
+                    <InputRadio Name="billDirection" Value="-1"></InputRadio>Payment
                 </label>                   
             </InputRadioGroup>            
         </div>
@@ -100,6 +100,8 @@
     private Bill bill = new()
         {
             BillDate = DateTime.Today,
+            BillDirection = -1,
+            UserID = Setting.UserBasicDetail.UserID,
             AccountNo = Setting.UserBasicDetail.AccountNo
         };
 
@@ -125,10 +127,12 @@
         if (bill.BillDirection == 1)
         {
             bill.Income = bill.BillAmount;
+            bill.BillDirectionName = "Income";
         }
         else
         {
             bill.Payment = bill.BillAmount;
+            bill.BillDirectionName = "Payment";
         }
         await billDBService.SaveBillAsync(bill);
         //before click Add bill button, bill always could be edited
@@ -169,11 +173,14 @@
     }
     private void AddBill()
     {
+        Message = String.Empty;
         // this bill is new
         isNewAdd = 1;
         bill = new()
         {
             BillDate = DateTime.Today,
+            BillDirection = -1,
+            UserID = Setting.UserBasicDetail.UserID,
             AccountNo = Setting.UserBasicDetail.AccountNo
         };
     }

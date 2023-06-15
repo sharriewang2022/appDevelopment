@@ -4,7 +4,7 @@
 @using Newtonsoft.Json
 @using System.IdentityModel.Tokens.Jwt
 @inject NavigationManager NavManager
-@inject UserRegisterDBService userRegisterDBService
+@inject UserLoginDBService userLoginDBService
 <h3>Launch the Application</h3>
 
 Launching the app
@@ -26,7 +26,7 @@ Launching the app
             Setting.UserBasicDetail = userBasicDetail;
             if (jsontoken.ValidTo < DateTime.UtcNow)
             {
-                bool isTokenRefreshed = await userRegisterDBService.RefreshToken();
+                bool isTokenRefreshed = await userLoginDBService.RefreshToken();
 
                 if (isTokenRefreshed)
                 {

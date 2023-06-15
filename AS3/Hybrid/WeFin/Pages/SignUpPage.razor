@@ -1,7 +1,7 @@
 ﻿@page "/registerpage"
 @using WeFin.Data
 @using WeFin.Models
-@inject UserRegisterDBService userRegisterDBService
+@inject UserLoginDBService userLoginDBService
 @inject NavigationManager navigationManager
 
 <PageTitle>Sign Up</PageTitle>
@@ -15,21 +15,21 @@
         <div style="border:dashed 0px; color:red;">@Message</div>
         <div class="form-group">
             <label>
-                User Name:
+                User Name<font color=red>*</font>:
             </label>
             <InputText class="form-control" @bind-Value="userRegister.UserName" />
             <ValidationMessage For="() => userRegister.UserName"></ValidationMessage>
         </div>
         <div class="form-group">
             <label>
-                User Password:
+                User Password<font color=red>*</font>:
             </label>
             <InputPassword class="form-control" @bind-Value="userRegister.UserPassword" />
             <ValidationMessage For="() => userRegister.UserPassword"></ValidationMessage>
         </div>
         <div class="form-group">
             <label>
-                Account Number:
+                Account Number<font color=red>*</font>:
             </label>
             <InputText class="form-control" @bind-Value="userRegister.AccountNo" />
             <ValidationMessage For="() => userRegister.AccountNo"></ValidationMessage>
@@ -46,15 +46,15 @@
                 <span>Already have an account?</span>
             </NavLink>
         </div>
-        <button class="btn btn-primary" type="submit">Sign up</button>
+        <button class="btn btn-primary" type="submit">Save</button>
         <button class="btn btn-primary" @onclick="AddUser">Add</button>
     </EditForm>
 </div>
 
 @code {
 
-    // this bill is default new
-    //private string _spinnerClass = "";
+        // this bill is default new
+        //private string _spinnerClass = "";
     private int isNewAdd = 1;
     private string Message = String.Empty;
     private string _userAvatar = "images/user.png";
@@ -66,6 +66,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        isNewAdd = 1;
         Message = String.Empty;
     }
 
@@ -76,10 +77,16 @@
         {
             return;
         }
+        UserRegister userInfo = await userLoginDBService.GetUserByNamePwdAccount(userRegister.UserName,
+            userRegister.UserPassword, userRegister.AccountNo);
+        if (userInfo != null)
+        {
+            Message = "The user's name, password, and account number already exist";
+            return;
+        }
         userRegister.IsAdd = isNewAdd;
-        userRegister.UserID = "00" + userRegister.Id;
-        await userRegisterDBService.SaveUserRegisterAsync(userRegister);
-        userRegister = new() { };
+        userRegister.UserID = Guid.NewGuid().ToString();
+        await userLoginDBService.SaveUserRegisterAsync(userRegister);
         isNewAdd = 0;
         userRegister.IsAdd = isNewAdd;
         Message = "The user is registered successfully!";
@@ -113,12 +120,17 @@
             Message = "Account Number should not be empty";
             return Message;
         }
-
+        
         if (String.IsNullOrEmpty(userRegister.Email))
         {
             Message = "Email should not be empty";
             return Message;
         }
+        if (!userRegister.Email.Contains("@"))
+        {
+            Message = "Email pattern is not right";
+            return Message;
+        }        
         Message = String.Empty;
         return Message;
     }
@@ -132,7 +144,7 @@
             userRegister.UserAvatar = _imageBase64Data;
         }
 
-        var response = await userRegisterDBService.SaveUserRegisterAsync(userRegister);
+        var response = await userLoginDBService.SaveUserRegisterAsync(userRegister);
         if (response != 0)
         {
             await App.Current.MainPage.DisplayAlert("Success", "User Registered.", "OK");
@@ -148,6 +160,7 @@
     private void AddUser()
     {
         // this user is new
+        Message = String.Empty;
         isNewAdd = 1;
         userRegister = new()
         {

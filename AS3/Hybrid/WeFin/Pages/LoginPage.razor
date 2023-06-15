@@ -4,7 +4,7 @@
 @using System.IdentityModel.Tokens.Jwt
 @using System.Security.Claims
 @using Newtonsoft.Json
-@inject UserRegisterDBService userLoginDBService
+@inject UserLoginDBService userLoginDBService
 @inject NavigationManager navigationManager
 @using WeFin.Services;
 
@@ -63,7 +63,7 @@
         <div class="text-center mt-2">
             <button class="btn btn-primary"  role="status"  type="submit">
                 <span class="@_spinnerClass" role="status" aria-hidden="true"></span>
-                Sign in
+                Log in
             </button>
             <button class="btn btn-primary" @onclick="SignUp">Sign up</button>
         </div>
@@ -151,7 +151,7 @@
     private async Task SignIn()
     {
         UserRegister userInfo = await userLoginDBService.GetUserRegisterByIdAsync(userLogin.UserName, userLogin.UserPassword);
-        //sign in success
+        
         Random random = new();
         //json string 
         String userLoginResponseInfo = "{\"UserName\":\"" + userInfo.UserName
@@ -161,11 +161,10 @@
                              + "\",\"RefreshToken\":\"" + userInfo.UserName + random.Next()
                              + "\",\"UserAvatar\":\"" + userInfo.UserAvatar
                              + "\"}";
+        //sign in success
         if (userInfo != null && !String.IsNullOrEmpty(userInfo.UserName))
         {
-            //isLoginSuccess = true;
-
-            //Json string change to Array or Model
+                 //Json string change to Array or Model
             var tokenResponse = JsonConvert.DeserializeObject<UserLogin>(userLoginResponseInfo);
 
             /*
@@ -206,10 +205,6 @@
                     UserID = userID,
                     AccountNo = accountNo
                 };
-
-            //Setting.UserBasicDetail = userBasicDetail.;
-
-
             navigationManager.NavigateTo("/welcomepage");
         }
         else

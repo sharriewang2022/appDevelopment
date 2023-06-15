@@ -26,7 +26,7 @@
     <PropertyColumn Title="Bill Type" Property="c=>c.BillType" Sortable />
     <PropertyColumn Title="Bill Date" Property="c=>c.BillDate" Format="yyyy-MM-dd" Sortable />
     <PropertyColumn Title="Bill No" Property="c=>c.BillNo" Sortable />
-    <PropertyColumn Title="Bill Direction" Property="c=>c.BillDirection" Sortable />
+    <PropertyColumn Title="Bill Direction" Property="c=>c.BillDirectionName" Sortable />
     <PropertyColumn Title="Bill Amount" Property="c=>c.BillAmount" Sortable />
     <PropertyColumn Title="Bill Abstract" Property="c=>c.BillAbstract" Sortable />
     <PropertyColumn Property="c=>c.Remark" />
@@ -50,19 +50,18 @@
     }
 </style>
 
-@code {
+                @code {
     private Bill[] bills;
     IEnumerable<Bill> selectedRows;
     ITable table;
     int _pageIndex = 1;
     int _pageSize = 10;
-    int _total = 20;
+    int _total = 10;
     int i = 0;
 
     protected override async Task OnInitializedAsync()
     {
         bills = await GetAllBills(1, 20);
-        _total = 20;
     }
 
     public void OnChange(QueryModel<Bill> queryModel)
@@ -71,16 +70,17 @@
     }
     public async Task<Bill[]> GetAllBills(int start, int end)
     {
-        List<Bill> billList = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.AccountNo);
+        List<Bill> billList = await billDBService.GetAllBillsAsync(Setting.UserBasicDetail.UserID, Setting.UserBasicDetail.AccountNo);
         if (billList != null)
         {
+            _total = billList.Count;
             return billList.ToArray();        
         }
         else
         {
+            _total = 0;
             return new Bill[1];
         }
-
     }
     public void RemoveSelection(int id)
     {
