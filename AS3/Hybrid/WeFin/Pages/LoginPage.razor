@@ -99,6 +99,7 @@
     {
         userLogin = new(){ };
         Message = String.Empty;
+        await AddDefaultUserSA();
     }
 
     private async Task OnValidSubmit(EditContext editContext)
@@ -137,8 +138,8 @@
     {
         //default user 
         if (userLogin.UserName.Equals("sa") && userLogin.UserPassword.Equals("1"))
-        {
-            //jwtToken = "123456";
+        {          
+            //jwtToken = "123456";          
             return true;
         }
 
@@ -146,6 +147,31 @@
         //jwtToken = null;
         userLogin.LoginFailureHidden = false;
         return false;
+    }
+
+    private async Task AddDefaultUserSA()
+    {
+        
+        UserLogin userLoginSa = new()
+        {
+            UserName = "sa",
+            UserPassword = "1"
+        };
+        accountNoList = await userLoginDBService.GetAccountNosByUserAsync(userLoginSa);
+        if (accountNoList == null || accountNoList.Count == 0)
+        {
+            UserRegister userRegisterSa = new()
+                {
+                    UserName = "sa",
+                    UserPassword = "1",
+                    Email = "@",
+                    IsAdd = 1,
+                    UserID = Guid.NewGuid().ToString(),
+                    AccountNo = "1"
+                };
+            // insert default User: sa
+            await userLoginDBService.SaveUserRegisterAsync(userRegisterSa);
+        }
     }
 
     private async Task SignIn()
