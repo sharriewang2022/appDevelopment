@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Questionnaire</string>
+    <string name="app_title">Android Quiz</string>
+    <string name="first_question">What year did Google purchase Android, Inc.?</string>
+</resources>
