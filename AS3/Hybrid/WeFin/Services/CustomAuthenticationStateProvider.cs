@@ -38,7 +38,7 @@ namespace WeFin.Services
         public async Task Logout()
         {
             SecureStorage.Remove("accounttoken");
-            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
         /// <summary>
