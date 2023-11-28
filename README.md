@@ -20,6 +20,9 @@ This app makes use of the SQLite database. All of the data entered by users, inc
 
 The application "WeFin 1.0" has been successfully released to the Huawei app store, AppGallery. The link for download is https://appgallery.huawei.com/app/C108525361.
 The following figures show the publishing result of this app. 
+
+![image](https://github.com/sharriewang2022/appDevelopment/assets/132410296/53bebf6c-756c-4d3b-adaf-7561ddb7511a)
+
  
 
 
